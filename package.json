@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/JooYoungHeo/apTest#readme",
   "dependencies": {
-    "async": "^2.5.0"
+    "async": "^2.5.0",
+    "bluebird": "^3.5.1"
   }
 }
