@@ -1,4 +1,5 @@
 const Promise = require('bluebird');
+const request = require('request');
 
 let promiseWhile = (condition, action) => {
   let resolver = Promise.defer();
@@ -21,9 +22,11 @@ promiseWhile(() => {
   return sum < stop;
 }, () => {
   return new Promise((resolve, reject) => {
-    sum++;
-    console.log(sum);
-    resolve();
+    request('http://www.naver.com', (err, res, body) => {
+      console.log(`${sum}: ${res.statusCode}`);
+      sum++;
+      resolve();
+    });
   });
 }).then(() => {
   console.log('done');
