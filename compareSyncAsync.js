@@ -24,6 +24,7 @@ const dirPath = '.';
 
 /* calc all file bytes - sync */
 // function calculateBytes() {
+//   console.time('sync calc start');
 //   let totalBytes = 0;
 //   let filenames = fs.readdirSync(dirPath);
 //
@@ -33,10 +34,12 @@ const dirPath = '.';
 //   }
 //
 //   console.log(totalBytes);
+//   console.timeEnd('sync calc start');
 // }
 
 /* calc all file bytes - async */
 function calculateBytes() {
+  console.time('async calc start');
   fs.readdir(dirPath, (err, filenames) => {
     let count = filenames.length;
     let totalBytes = 0;
@@ -45,7 +48,10 @@ function calculateBytes() {
       fs.stat(`${dirPath}/${filenames[i]}`, (err, stats) => {
         totalBytes += stats.size;
         count --;
-        if (count === 0) console.log(totalBytes);
+        if (count === 0) {
+          console.log(totalBytes);
+          console.timeEnd('async calc start');
+        }
       });
     }
   });
